@@ -8,7 +8,7 @@ INCDIR = include
 OBJDIR = objs
 IMG_NAME = fs.img
 
-SRCS = connection.c
+SRCS = connection.c picohttpparser.c
 OBJ_NAMES = $(patsubst %.c,%.o,$(SRCS))
 OBJS = $(addprefix $(OBJDIR)/,$(OBJ_NAMES))
 
