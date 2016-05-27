@@ -162,6 +162,7 @@ int recv_con(conn_info_t *info)
     else if (bytes == -1){
         if (errno == EAGAIN || errno == EWOULDBLOCK){
             printf("EAGAIN!\n");
+            return -1;
         }
         else{
             perror("recv");
@@ -192,8 +193,14 @@ int send_con(conn_info_t *info)
     }
     bytes = send(info->sockfd, ptr, size, 0);
     if (bytes == -1){
-        perror("recv");
-        return -1;
+        if (errno == EAGAIN || errno == EWOULDBLOCK){
+            printf("EAGAIN!\n");
+            return -1;
+        }
+        else{
+            perror("recv");
+            return -1;
+        }
     }
     info->written += bytes;
 
